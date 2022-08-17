@@ -1,0 +1,15 @@
+﻿CREATE TABLE dbo.Categroy (
+  CategoryID VARCHAR(200) PRIMARY KEY,
+  CategoryName varchar(100) NOT NULL,
+  ShortName VARCHAR(100) NOT NULL
+)
+
+
+CREATE TABLE dbo.Product (
+  ProductID int  PRIMARY KEY IDENTITY,
+  ProductName varchar(100)NOT NULL ,
+  Price varchar(50)NOT NULL,
+  Code VARCHAR(50) NOT NULL,
+  CateogoryID VARCHAR(200) FOREIGN KEY REFERENCES Categroy(CategoryID),
+
+)

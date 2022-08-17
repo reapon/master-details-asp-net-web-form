@@ -7,23 +7,23 @@
 
             $("#add-product").click(function (event) {
                 event.preventDefault();
-                let newRow = $("<tr>");
-                let cols = '';
+                var newRow = $("<tr>");
+                var cols = '';
 
-                console.log("aaa");
+
 
 
                 cols += `<td>
-                            <div class="col-md-6">
+                           
                                 <input type="text" class="form-control" placeholder="Enter Product Name">
-                            </div>
+                       
                             </td>
 
                         <td>
-                            <div class="col-md-4">
+                            
 
                                 <input type="text" class="form-control" placeholder="Enter Price">
-                            </div>
+                         
                         </td>
 
                         <td>
@@ -50,19 +50,26 @@
                 });
 
 
-            $("#submit-btn").click(function(event) {
+            $("#submit-btn").click(function (event) {
 
                 event.preventDefault();
 
-                let myTable = document.getElementById('table');
+                var masterDetails = new Array();
+                var table = document.getElementById('table');
+                for (var i = 1; i < table.rows.length; i++) {
+                    var row = table.rows[i];
+                    var masterD = {};
+                    masterD.ProductName = row.cells[0].getElementsByTagName('input')[0].value;
+                    masterD.Price = row.cells[1].getElementsByTagName('input')[0].value;
+                    masterDetails.push(masterD);
 
-                for (let row of myTable.rows) {
-                    for (let cell of row.cells) {
-                        console.log(cell.innerText);
-                    }
                 }
 
+                document.getElementsByName("MasterDetailsJSON")[0].value = JSON.stringify(masterDetails);
+                console.log(masterDetails);
+
             });
+
 
 
         })
@@ -78,7 +85,7 @@
 
     <div class="container">
 
-
+        <input type="hidden" name="MasterDetailsJSON"/>
 
         <div class="form-group">
             <label>Category</label>
@@ -101,17 +108,15 @@
                 <tbody>
                     <tr>
                         <td>
-                            <div class="col-md-6">
 
-                                <input type="text" class="form-control" placeholder="Enter Product Name">
-                            </div>
+
+                            <input type="text"  class="form-control" placeholder="Enter Product Name">
                         </td>
 
                         <td>
-                            <div class="col-md-4">
 
-                                <input type="text" class="form-control" placeholder="Enter Price">
-                            </div>
+
+                            <input type="text"  class="form-control" placeholder="Enter Price">
                         </td>
 
                         <td>
