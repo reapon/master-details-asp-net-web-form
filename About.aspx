@@ -96,17 +96,11 @@
                  var cols = '';
 
 
-                 cols += `<td>
-                           
-                                <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Product Name">
-                       
+                 cols += `<td>                           
+                                <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Product Name">                       
                             </td>
-
-                        <td>
-                            
-
-                                <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Price">
-                         
+                        <td>                            
+                                <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Price">                         
                         </td>
 
                         <td>
