@@ -9,14 +9,27 @@
 
 
 
-    <div class="container">
+    <div class="container" style="margin:20px auto">
 
-        <input type="hidden" name="MasterDetailsJSON" />
-
-        <div class="form-group">
-            <label>Category</label>
-            <input type="text" class="form-control" placeholder="Enter Category">
+        <input type="hidden"  name="MasterDetailsJSON" />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" class="form-control" id="categoryName" runat="server" clientidmode="Static"  placeholder="Category Name"/>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Short Name</label>
+                    <input type="text" class="form-control" id="categoryShortName" runat="server" clientidmode="Static"  placeholder="Category Short Name"/>
+                </div>
+            </div>
         </div>
+       
+        
+    
 
         <hr />
 
@@ -27,6 +40,7 @@
                     <tr>
                         <td>Product Name</td>
                         <td>Price</td>
+                        <td>Code</td>
                         <td>Action</td>
                     </tr>
                 </thead>
@@ -43,6 +57,11 @@
 
 
                             <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Price">
+                        </td>
+                        <td>
+
+
+                            <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Code">
                         </td>
 
                         <td>
@@ -77,7 +96,7 @@
 
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-sm btn-default" id="submit-btn">Submit All</button>
+                <asp:Button Text="Submit All" runat="server" CssClass="btn btn-sm btn-default"   id="submitBtn" OnClientClick="submitClick()" clientidmode="Static" OnClick="submitBtn_Click1"  />
             </div>
         </div>
 
@@ -101,6 +120,10 @@
                             </td>
                         <td>                            
                                 <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Price">                         
+                        </td>
+
+ <td>
+                                <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Enter Code">
                         </td>
 
                         <td>
@@ -139,28 +162,52 @@
                  });
 
 
-             $("#submit-btn").click(function (event) {
+             //$("#submitBtn").click(function (event) {
 
-                 event.preventDefault();
+             //    event.preventDefault();
 
-                 var masterDetails = new Array();
-                 var table = document.getElementById('table');
-                 for (var i = 1; i < table.rows.length; i++) {
-                     var row = table.rows[i];
-                     var masterD = {};
-                     masterD.ProductName = row.cells[0].getElementsByTagName('input')[0].value;
-                     masterD.Price = row.cells[1].getElementsByTagName('input')[0].value;
-                     masterDetails.push(masterD);
+             //    var masterDetails = new Array();
+             //    var table = document.getElementById('table');
+             //    for (var i = 1; i < table.rows.length; i++) {
+             //        var row = table.rows[i];
+             //        var masterD = {};
+             //        masterD.ProductName = row.cells[0].getElementsByTagName('input')[0].value;
+             //        masterD.Price = row.cells[1].getElementsByTagName('input')[0].value;
+             //        masterD.Code = row.cells[2].getElementsByTagName('input')[0].value;
+             //        masterDetails.push(masterD);
 
-                 }
+             //    }
 
-                 document.getElementsByName("MasterDetailsJSON")[0].value = JSON.stringify(masterDetails);
-                 console.log(masterDetails);
+             //    console.log(masterDetails);
 
-             });
+
+             //    document.getElementsByName("MasterDetailsJSON")[0].value = JSON.stringify(masterDetails);
+             //    console.log(masterDetails);
+
+             //});
 
 
          });
+
+         function submitClick() {
+             var masterDetails = new Array();
+             var table = document.getElementById('table');
+             for (var i = 1; i < table.rows.length; i++) {
+                 var row = table.rows[i];
+                 var masterD = {};
+                 masterD.ProductName = row.cells[0].getElementsByTagName('input')[0].value;
+                 masterD.Price = row.cells[1].getElementsByTagName('input')[0].value;
+                 masterD.Code = row.cells[2].getElementsByTagName('input')[0].value;
+                 masterDetails.push(masterD);
+
+             }
+
+             console.log(masterDetails);
+
+
+             document.getElementsByName("MasterDetailsJSON")[0].value = JSON.stringify(masterDetails);
+             console.log(masterDetails);
+         }
 
          function validationAlert(event) {
              event.target.addEventListener("keyup", function () {
@@ -192,8 +239,9 @@
 
              var name = row.cells[0].getElementsByTagName('input')[0].value;
              var price = row.cells[1].getElementsByTagName('input')[0].value;
+             var code = row.cells[1].getElementsByTagName('input')[0].value;
 
-             if (name === "" || price === "") {
+             if (name === "" || price === "" || code === "") {
                  return false;
              } else {
                  return true;

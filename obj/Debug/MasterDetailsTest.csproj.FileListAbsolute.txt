@@ -141,7 +141,6 @@ C:\Users\ASUS\Desktop\master-details-asp-net-web-form\bin\Newtonsoft.Json.xml
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\bin\Antlr3.Runtime.pdb
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.csproj.AssemblyReference.cache
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.csproj.CopyComplete
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.dll
