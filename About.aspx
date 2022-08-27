@@ -11,8 +11,10 @@
 
     <div class="container" style="margin:20px auto">
 
-        <input type="hidden"  name="MasterDetailsJSON" />
+        <input type="hidden" id="masterDeailsJson"  clientidmode="Static" name="MasterDetailsJSON" />
         <div class="row">
+            <input type="hidden"  id="categoryIdtxtBox" runat="server" clientidmode="Static" />
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Category</label>
@@ -45,7 +47,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="tableBody" runat="server" >
                     <tr>
                         <td>
 
@@ -92,12 +94,53 @@
         </div>
 
         <hr />
-        <hr />
 
         <div class="row">
             <div class="col-md-2">
                 <asp:Button Text="Submit All" runat="server" CssClass="btn btn-sm btn-default"   id="submitBtn" OnClientClick="submitClick()" clientidmode="Static" OnClick="submitBtn_Click1"  />
+                
+                <asp:Button Text="Update" runat="server" CssClass="btn btn-sm btn-info"   id="updateBtn" OnClientClick="submitClick()" clientidmode="Static" OnClick="updateBtn_Click"   />
+
+                <asp:Button Text="Cancel" runat="server" CssClass="btn btn-sm btn-warning"   id="cancelBtn" clientidmode="Static" OnClick="cancelBtn_Click"  />
+                
             </div>
+        </div>
+        
+        <hr />
+        
+        <br />
+
+        
+        <div class="row">
+            <asp:GridView ID="gdViewMasterDetails"  AutoGenerateColumns="False"  runat="server" ClientIDMode="Static" CssClass="table table-bordered"  OnRowCommand="gdViewMasterDetails_RowCommand" >
+                
+                
+                   <Columns>
+
+                       <asp:TemplateField>
+                        <ItemTemplate>
+                           <asp:LinkButton ID="lbEdit" CommandArgument='<%# Eval("CategoryID") %>' CommandName="EditRow" CssClass="btn btn-sm btn-warning"  runat="server">Edit</asp:LinkButton>
+
+                            <asp:LinkButton ID="lbDelete" CommandArgument='<%# Eval("CategoryID") %>' CommandName="DeleteRow" CssClass="btn btn-sm btn-danger" OnClientClick="return confirm('Are you sure?')" runat="server">Delete</asp:LinkButton>
+                        </ItemTemplate>
+                 
+                        </asp:TemplateField>
+                      
+                       
+                       <asp:BoundField DataField="CategoryName" HeaderText="Category Name"  />
+                       <asp:BoundField DataField="ShortName" HeaderText="Short Name" 
+                            />
+                     
+
+
+                   </Columns>
+                
+                
+                
+                
+
+            </asp:GridView>
+          
         </div>
 
 
@@ -239,7 +282,7 @@
 
              var name = row.cells[0].getElementsByTagName('input')[0].value;
              var price = row.cells[1].getElementsByTagName('input')[0].value;
-             var code = row.cells[1].getElementsByTagName('input')[0].value;
+             var code = row.cells[2].getElementsByTagName('input')[0].value;
 
              if (name === "" || price === "" || code === "") {
                  return false;
