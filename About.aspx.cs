@@ -40,9 +40,7 @@ namespace MasterDetailsTest
                         {
                             gdViewMasterDetails.DataSource = dt;
                             gdViewMasterDetails.DataBind();
-                            //Required for jQuery DataTables to work.
-                            //gdViewMasterDetails.UseAccessibleHeader = true;
-                            //gdViewMasterDetails.HeaderRow.TableSection = gdViewMasterDetails.TableHeader;
+
                         }
 
                         else
@@ -230,6 +228,7 @@ namespace MasterDetailsTest
                     SqlDataAdapter adap = new SqlDataAdapter(cmd);
                     adap.Fill(table);
                     SqlDataReader reader = cmd.ExecuteReader();
+                    int counter = 0;
                     while (reader.Read())
                     {
 
@@ -240,11 +239,25 @@ namespace MasterDetailsTest
                         string price = reader["Price"].ToString();
                         string code = reader["Code"].ToString();
 
-                        htmlStr += "<tr><td><input type = 'text'  value= " + productName + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
-                                   "<td><input type = 'text'  value= " + price + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
-                                   "<td><input type = 'text'  value= " + code + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
-                                   "<td> <div class='col-md-2'><button  id='deleteRow' class='btn btn-sm btn-danger'>Remove</button></div></td> </tr>"
-                                   ;
+                        if (counter == 0)
+                        {
+                            htmlStr += "<tr><td><input type = 'text'  value= " + productName + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
+                                       "<td><input type = 'text'  value= " + price + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
+                                       "<td><input type = 'text'  value= " + code + " onfocusout = 'validationAlert(event)' class='form-control'/> </td> </tr>"
+                                ;
+                        }
+                        else
+                        {
+                            htmlStr += "<tr><td><input type = 'text'  value= " + productName + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
+                                       "<td><input type = 'text'  value= " + price + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
+                                       "<td><input type = 'text'  value= " + code + " onfocusout = 'validationAlert(event)' class='form-control'/> </td>" +
+                                       "<td> <div class='col-md-2'><button  id='deleteRow' class='btn btn-sm btn-danger'>Remove</button></div></td> </tr>"
+                                ;
+                        }
+
+                        counter++;
+
+
                     }
 
                     tableBody.InnerHtml = htmlStr;

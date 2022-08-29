@@ -205,29 +205,7 @@
                  });
 
 
-             //$("#submitBtn").click(function (event) {
-
-             //    event.preventDefault();
-
-             //    var masterDetails = new Array();
-             //    var table = document.getElementById('table');
-             //    for (var i = 1; i < table.rows.length; i++) {
-             //        var row = table.rows[i];
-             //        var masterD = {};
-             //        masterD.ProductName = row.cells[0].getElementsByTagName('input')[0].value;
-             //        masterD.Price = row.cells[1].getElementsByTagName('input')[0].value;
-             //        masterD.Code = row.cells[2].getElementsByTagName('input')[0].value;
-             //        masterDetails.push(masterD);
-
-             //    }
-
-             //    console.log(masterDetails);
-
-
-             //    document.getElementsByName("MasterDetailsJSON")[0].value = JSON.stringify(masterDetails);
-             //    console.log(masterDetails);
-
-             //});
+            
 
 
          });

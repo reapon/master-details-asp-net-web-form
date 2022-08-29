@@ -145,3 +145,4 @@ C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTes
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.csproj.CopyComplete
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.dll
 C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.pdb
+C:\Users\ASUS\Desktop\master-details-asp-net-web-form\obj\Debug\MasterDetailsTest.csproj.AssemblyReference.cache
