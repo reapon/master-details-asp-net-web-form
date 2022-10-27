@@ -1,17 +1,55 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="MasterDetailsTest.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %>.</h2>
-    <h3>Your contact page.</h3>
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+    <script src="Scripts/jquery-3.4.1.js"></script>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <style>
+        #imgpreview {
+            border-width: 0px;
+            visibility: hidden;
+        }
+    </style>
+
+    <div>
+  
+  
+        <asp:FileUpload ID="FileUpload1" runat="server" ClientIDMode="Static" onchange="showpreview(this);"/><br/>
+
+        <asp:Button ID="Button1" runat="server" Text="Upload File" OnClick="UploadFile" /><br/>
+        <asp:Image ID="imgpreview" runat="server" ClientIDMode="Static" height="200" width="200" />
+        
+        
+
+        
+    </div>
+    
+    
+    <script type="text/javascript">
+        
+       
+
+
+        function showpreview(input) {
+
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgpreview').css('visibility', 'visible');
+                    $('#imgpreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+       
+
+    </script>
+    
+    
 </asp:Content>
+
