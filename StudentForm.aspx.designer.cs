@@ -15,6 +15,24 @@ namespace MasterDetailsTest
     {
 
         /// <summary>
+        /// oldImagePath control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden oldImagePath;
+
+        /// <summary>
+        /// StdIdTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden StdIdTextBox;
+
+        /// <summary>
         /// studentIdTextBox control.
         /// </summary>
         /// <remarks>
@@ -213,6 +231,15 @@ namespace MasterDetailsTest
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regexEmailValid;
 
         /// <summary>
+        /// isWaiverCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox isWaiverCheckBox;
+
+        /// <summary>
         /// tableBody control.
         /// </summary>
         /// <remarks>
@@ -247,5 +274,14 @@ namespace MasterDetailsTest
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button refreshButton;
+
+        /// <summary>
+        /// gdViewStudent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gdViewStudent;
     }
 }

@@ -9,6 +9,8 @@
 
     <div class="container" style="margin: 20px auto">
         <input type="hidden" id="masterDeailsJson" clientidmode="Static" name="MasterDetailsJSON" />
+    <input type="hidden"  id="oldImagePath" runat="server" clientidmode="Static" />
+    <input type="hidden"  id="StdIdTextBox" runat="server" clientidmode="Static" />
         <div class="row">
             <div class="col-md-4">
                 <div class="row">
@@ -80,7 +82,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label>Date Of Birth <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="dobTextBox" runat="server" clientidmode="Static" placeholder="Date of Birth" />
+                        <input type="text" class="form-control" id="dobTextBox" runat="server" clientidmode="Static" onchange="getAge(this)" placeholder="Date of Birth" />
                         <div>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="* Please Enter Date of Birth" ControlToValidate="dobTextBox" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
@@ -127,7 +129,7 @@
                     <div class="form-group">
                         <label>Address <span class="text-danger">*</span></label>
 
-                        <textarea class="form-control" runat="server" id="addressTextBox" rows="1"></textarea>
+                        <textarea class="form-control" runat="server" id="addressTextBox" placeholder="Address" rows="1"></textarea>
                         <div>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="* Please Enter Address" ControlToValidate="addressTextBox" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
@@ -158,9 +160,17 @@
                 <div class="row">
                     <div class="form-check">
                         <div>
-                            <label class="form-check-label" style="margin-left: 10px;">Is Waiver</label>
+                          <%--  <label class="form-check-label" style="margin-left: 10px;">Is Waiver</label>
 
-                            <input type="checkbox" class="form-check-input" id="isWaiverCheckBox">
+                            <input type="checkbox" class="form-check-input" id="isWaiverCheckBox">--%>
+                            
+                            <label class="form-check-label" >
+                                <input type="checkbox" class="form-check-input" id="isWaiverCheckBox" runat="server" style="margin-top: -1px; "/>
+                                <span style="margin-left: 10px;">
+                                    Is Waiver
+                                </span>
+                                
+                            </label>
                         </div>
 
                     </div>
@@ -206,7 +216,7 @@
                         <td>
 
 
-                            <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Pass Year">
+                            <input type="number" onfocusout="validationAlert(event)" class="form-control" placeholder="Pass Year">
                         </td>
                         <td>
 
@@ -244,12 +254,12 @@
         <div class="row" style="margin-top: 10px;">
             <div class="col-md-12">
                 <div class="row">
-                    <asp:Button ID="saveButton" runat="server" Text="Save" OnClientClick="submitClick()" CssClass="btn btn-success btn-sm" ClientIDMode="Static" />
+                    <asp:Button ID="saveButton" runat="server" Text="Save" OnClientClick="submitClick()" CssClass="btn btn-success btn-sm" ClientIDMode="Static" OnClick="saveButton_Click" />
 
 
-                    <asp:Button ID="updateButton" runat="server" Text="Update" OnClientClick="submitClick()" CssClass="btn btn-warning btn-sm" ClientIDMode="Static" />
+                    <asp:Button ID="updateButton" runat="server" Text="Update" OnClientClick="submitClick()" CssClass="btn btn-warning btn-sm" ClientIDMode="Static" OnClick="updateButton_Click" />
 
-                    <asp:Button ID="refreshButton" runat="server" Text="Refresh" CssClass="btn btn-info btn-sm" ClientIDMode="Static" />
+                    <asp:Button ID="refreshButton" runat="server" CausesValidation="False" Text="Refresh" CssClass="btn btn-info btn-sm" ClientIDMode="Static" OnClick="refreshButton_Click" />
 
 
                 </div>
@@ -257,24 +267,58 @@
 
             </div>
         </div>
+    
+        <br />
+    
 
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+
+       
+        <asp:GridView ID="gdViewStudent"  AutoGenerateColumns="False"  runat="server" ClientIDMode="Static" CssClass="table table-bordered" OnRowCommand="gdViewStudent_RowCommand"   >
+                
+                
+            <Columns>
+
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbEdit" CommandArgument='<%# Eval("StudentID") %>' CausesValidation="False" CommandName="EditRow" CssClass="btn btn-sm btn-warning"  runat="server">Edit</asp:LinkButton>
+
+                        <asp:LinkButton ID="lbDelete" CommandArgument='<%# Eval("StudentID") %>' CausesValidation="False" CommandName="DeleteRow" CssClass="btn btn-sm btn-danger" OnClientClick="return confirm('Are you sure?')" runat="server">Delete</asp:LinkButton>
+                    </ItemTemplate>
+                 
+                </asp:TemplateField>
+                      
+                       
+                <asp:BoundField DataField="StudentName" HeaderText="Std. Name"  />
+                <asp:BoundField DataField="FatherName" HeaderText="Father Name"/>
+                <asp:BoundField DataField="MotherName" HeaderText="Mother Name"/>
+                <asp:BoundField DataField="Age" HeaderText="Age"/>
+                <asp:BoundField DataField="Email" HeaderText="Email"/>
+                <asp:BoundField DataField="Mobile" HeaderText="Mobile"/>
+                     
+
+
+            </Columns>
+                
+                
+                
+                
+
+        </asp:GridView>
+                
+            </div>
+            
+        </div>
+          
+    </div>
     </div>
 
 
     <script type="text/javascript">
-        function showImagePreview(input) {
-
-            if (input.files && input.files[0]) {
-
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#imagePreview').css('visibility', 'visible');
-                    $('#imagePreview').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-
-        }
+      
 
         $(document).ready(function () {
             $("#add-result").click(function (event) {
@@ -297,7 +341,7 @@
                     <td>
 
 
-                        <input type="text" onfocusout="validationAlert(event)" class="form-control" placeholder="Pass Year">
+                        <input type="number" onfocusout="validationAlert(event)" class="form-control" placeholder="Pass Year">
                     </td>
                     <td>
 
@@ -357,7 +401,10 @@
                 masterD.PassYear = row.cells[2].getElementsByTagName('input')[0].value;
                 masterD.Result = row.cells[3].getElementsByTagName('input')[0].value;
                 masterD.Remarks = row.cells[4].getElementsByTagName('input')[0].value;
-                masterDetails.push(masterD);
+                if (masterD.ExamName && masterD.Board && masterD.PassYear && masterD.Result && masterD.Remarks) {
+                    masterDetails.push(masterD);
+
+                }
 
             }
 
@@ -418,6 +465,105 @@
         if (!disableAddButton()) {
             document.getElementById("add-result")?.setAttribute("disabled", "true");
         }
+
+
+        function getAge(birthDate) {
+
+
+            var dateString = birthDate.value;
+            var now = new Date();
+            var today = new Date(now.getYear(), now.getMonth(), now.getDate());
+
+            var yearNow = now.getYear();
+            var monthNow = now.getMonth();
+            var dateNow = now.getDate();
+
+            var dob = new Date(dateString.substring(6, 10),
+                dateString.substring(0, 2) - 1,
+                dateString.substring(3, 5)
+            );
+
+            var yearDob = dob.getYear();
+            var monthDob = dob.getMonth();
+            var dateDob = dob.getDate();
+            var age = {};
+            var ageString = "";
+            var yearString = "";
+            var monthString = "";
+            var dayString = "";
+
+
+            var yearAge = yearNow - yearDob;
+
+            if (monthNow >= monthDob)
+                var monthAge = monthNow - monthDob;
+            else {
+                yearAge--;
+                var monthAge = 12 + monthNow - monthDob;
+            }
+
+            if (dateNow >= dateDob)
+                var dateAge = dateNow - dateDob;
+            else {
+                monthAge--;
+                var dateAge = 31 + dateNow - dateDob;
+
+                if (monthAge < 0) {
+                    monthAge = 11;
+                    yearAge--;
+                }
+            }
+
+            age = {
+                years: yearAge,
+                months: monthAge,
+                days: dateAge
+            };
+
+            if (age.years > 1) yearString = " years";
+            else yearString = " year";
+            if (age.months > 1) monthString = " months";
+            else monthString = " month";
+            if (age.days > 1) dayString = " days";
+            else dayString = " day";
+
+
+            if ((age.years > 0) && (age.months > 0) && (age.days > 0))
+                ageString = age.years + yearString + ", " + age.months + monthString + ", and " + age.days + dayString + " old.";
+            else if ((age.years === 0) && (age.months === 0) && (age.days > 0))
+                ageString = "Only " + age.days + dayString + " old!";
+            else if ((age.years > 0) && (age.months === 0) && (age.days === 0))
+                ageString = age.years + yearString + " old.";
+            else if ((age.years > 0) && (age.months > 0) && (age.days === 0))
+                ageString = age.years + yearString + " and " + age.months + monthString + " old.";
+            else if ((age.years === 0) && (age.months > 0) && (age.days > 0))
+                ageString = age.months + monthString + " and " + age.days + dayString + " old.";
+            else if ((age.years > 0) && (age.months === 0) && (age.days > 0))
+                ageString = age.years + yearString + " and " + age.days + dayString + " old.";
+            else if ((age.years === 0) && (age.months > 0) && (age.days === 0))
+                ageString = age.months + monthString + " old.";
+            else ageString = "Oops! Could not calculate age!";
+
+            document.getElementById("ageTextBox").value = ageString;
+            //return ageString;
+        }
+
+
+        function showImagePreview(input) {
+
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('visibility', 'visible');
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+
 
 
 
