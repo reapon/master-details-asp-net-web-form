@@ -298,7 +298,11 @@
                 <asp:BoundField DataField="Age" HeaderText="Age"/>
                 <asp:BoundField DataField="Email" HeaderText="Email"/>
                 <asp:BoundField DataField="Mobile" HeaderText="Mobile"/>
-                     
+                <asp:TemplateField HeaderText="Image">
+                <ItemTemplate>
+                    <asp:Image  runat="server" Height="50px" Width="50px" ImageUrl='<%# Eval("ImageShow") %>' />
+                </ItemTemplate>
+                </asp:TemplateField>
 
 
             </Columns>

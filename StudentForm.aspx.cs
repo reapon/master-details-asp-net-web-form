@@ -28,7 +28,7 @@ namespace MasterDetailsTest
 
         protected void LoadGridView()
         {
-            string query = @"select StudentID, ID, StudentName, FatherName, MotherName, Religion, Address, Mobile, Email, DOB,IsWaiver, Age, ImagePath from tblStudent";
+            string query = @"select CONCAT('/Images/', ImagePath) as ImageShow, StudentID, ID, StudentName, FatherName, MotherName, Religion, Address, Mobile, Email, DOB,IsWaiver, Age, ImagePath from tblStudent";
 
             using (SqlConnection con = new SqlConnection(connection))
             {
