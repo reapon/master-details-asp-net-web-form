@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StudentForm.aspx.cs" Inherits="MasterDetailsTest.StudentForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        #imageShow {
+            border-radius: 50px;
+        }
+    </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 <script src="Scripts/jquery-3.4.1.js"></script>
@@ -300,7 +305,7 @@
                 <asp:BoundField DataField="Mobile" HeaderText="Mobile"/>
                 <asp:TemplateField HeaderText="Image">
                 <ItemTemplate>
-                    <asp:Image  runat="server" Height="50px" Width="50px" ImageUrl='<%# Eval("ImageShow") %>' />
+                    <asp:Image  runat="server" Height="50px" ID="imageShow" Width="50px" ImageUrl='<%# Eval("ImageShow") %>' />
                 </ItemTemplate>
                 </asp:TemplateField>
 
@@ -535,7 +540,7 @@
             if ((age.years > 0) && (age.months > 0) && (age.days > 0))
                 ageString = age.years + yearString + ", " + age.months + monthString + ", and " + age.days + dayString + " old.";
             else if ((age.years === 0) && (age.months === 0) && (age.days > 0))
-                ageString = "Only " + age.days + dayString + " old!";
+                ageString = age.days + dayString + " old!";
             else if ((age.years > 0) && (age.months === 0) && (age.days === 0))
                 ageString = age.years + yearString + " old.";
             else if ((age.years > 0) && (age.months > 0) && (age.days === 0))
